@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách điểm danh";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadClassBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Xem lớp</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedClass" onchange="LoadAttendanceByClassId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 pt-3">
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Từ ngày</label>
+                    <div class="col-sm">
+                        <div class="input-group datetimepicker date" id="DateFrom" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#DateFrom" name="DateFrom" />
+                            <div class="input-group-append" data-target="#DateFrom" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 pt-3">
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Đến ngày</label>
+                    <div class="col-sm">
+                        <div class="input-group datetimepicker date" id="DateTo" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#DateTo" name="DateTo" />
+                            <div class="input-group-append" data-target="#DateTo" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <div id="attendanceHTML" class="table-responsive">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var _ID_CLASS = @ViewBag.IdClass;
+</script>
+
+@section scripts {
+    <script src="~/Assests/Admin/js/pages/AttendanceListStudent.js"></script>
+    <script src="~/Assests/Admin/js/pages/AttendanceListTable.js"></script>
+}

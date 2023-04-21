@@ -1,0 +1,49 @@
+﻿@using GMAH.Web.Helpers
+@using GMAH.Models.Models
+
+@{
+    ViewBag.Title = "Tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+
+    // Tạo ra list column cho datatable
+    List<DataTableColumn> listColumn = new List<DataTableColumn>
+    {
+        new DataTableColumn("Họ tên người dùng", "Fullname"),
+        new DataTableColumn("Chức vụ", "Role"),
+        new DataTableColumn("Tài khoản", "Username"),
+        new DataTableColumn("Điện thoại", "Phone"),
+        new DataTableColumn("Email", "Email"),
+        new DataTableColumn(null, null),
+        new DataTableColumn(null, null),
+    };
+
+    ViewBag.ListColumn = listColumn.Select(x => x.Name).ToList();
+}
+
+@Styles.Render("~/css/datatable")
+
+@Html.Partial("_ListUser")
+
+<script>
+    var columns = [];
+    var actionName = '@actionName';
+    var linkInfoUser = '@Url.Action("Info" + actionName, "User")';
+</script>
+
+@foreach (var column in listColumn)
+{
+    if (string.IsNullOrEmpty(column.Key))
+    {
+        continue;
+    }
+
+    <script>
+        columns.push({ data: '@column.Key' });
+    </script>
+}
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListUser.js"></script>
+}

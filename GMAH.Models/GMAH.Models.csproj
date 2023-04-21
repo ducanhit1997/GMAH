@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{992629D0-81BA-4813-BDB2-A962C3C5E738}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GMAH.Models</RootNamespace>
+    <AssemblyName>GMAH.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consts\BehaviourEnum.cs" />
+    <Compile Include="Consts\InputTypeEnum.cs" />
+    <Compile Include="Consts\MenuConst.cs" />
+    <Compile Include="Consts\RankEnum.cs" />
+    <Compile Include="Consts\ReportStatusEnum.cs" />
+    <Compile Include="Consts\ReportTypeEnum.cs" />
+    <Compile Include="Consts\RoleEnum.cs" />
+    <Compile Include="Consts\ScoreTypeEnum.cs" />
+    <Compile Include="Consts\ScoreViewTypeEnum.cs" />
+    <Compile Include="Consts\SettingEnum.cs" />
+    <Compile Include="Consts\ViewSemesterTypeEnum.cs" />
+    <Compile Include="Models\AttendanceStatus.cs" />
+    <Compile Include="Models\AvgSubjectForStudentData.cs" />
+    <Compile Include="Models\DataTableColumn.cs" />
+    <Compile Include="Models\ImportScoreExcel.cs" />
+    <Compile Include="Models\ImportTimelineExcel.cs" />
+    <Compile Include="Models\JqueryDatatableParam.cs" />
+    <Compile Include="Models\ReportEditFieldData.cs" />
+    <Compile Include="Models\TimelineData.cs" />
+    <Compile Include="Models\UpdateAvgSubjectForStudentResult.cs" />
+    <Compile Include="Models\UserIdentity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddOrRemoveStudentToClassRequest.cs" />
+    <Compile Include="ViewModels\AddStudentScoreRequest.cs" />
+    <Compile Include="ViewModels\BaseResponse.cs" />
+    <Compile Include="ViewModels\ChangeChildInfoRequest.cs" />
+    <Compile Include="ViewModels\ClassAttendanceViewModel.cs" />
+    <Compile Include="ViewModels\ClassSubjectTeacherViewModel.cs" />
+    <Compile Include="ViewModels\ClassViewModel.cs" />
+    <Compile Include="ViewModels\GetClassScoreResponse.cs" />
+    <Compile Include="ViewModels\GetGradeRuleResponse.cs" />
+    <Compile Include="ViewModels\GetTeacherClassBySemesterResponse.cs" />
+    <Compile Include="ViewModels\GradeRuleViewModel.cs" />
+    <Compile Include="ViewModels\HistoryScoreLogViewModel.cs" />
+    <Compile Include="ViewModels\HistoryScoreViewModel.cs" />
+    <Compile Include="ViewModels\ListAttendanceViewModel.cs" />
+    <Compile Include="ViewModels\OptionViewModel.cs" />
+    <Compile Include="ViewModels\ReportResponse.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\RuleDetailViewModel.cs" />
+    <Compile Include="ViewModels\SaveAllSettingRequest.cs" />
+    <Compile Include="ViewModels\SaveGradeRuleRequest.cs" />
+    <Compile Include="ViewModels\SaveStudentBehaviourRequest.cs" />
+    <Compile Include="ViewModels\ScoreComponentViewModel.cs" />
+    <Compile Include="ViewModels\ScoreDetailViewModel.cs" />
+    <Compile Include="ViewModels\ScoreSubjectViewModel.cs" />
+    <Compile Include="ViewModels\ScoreTypeRequest.cs" />
+    <Compile Include="ViewModels\ScoreTypeViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
+    <Compile Include="ViewModels\SemesterViewModel.cs" />
+    <Compile Include="ViewModels\SetTeacherSubjectRequest.cs" />
+    <Compile Include="ViewModels\SettingCurrentSemesterResponse.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="ViewModels\StudentAttendanceViewModel.cs" />
+    <Compile Include="ViewModels\StudentScoreResponse.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
+    <Compile Include="ViewModels\SubjectAndTeacherViewModel.cs" />
+    <Compile Include="ViewModels\SubjectViewModel.cs" />
+    <Compile Include="ViewModels\TeacherInSubjectViewModel.cs" />
+    <Compile Include="ViewModels\TeacherViewModel.cs" />
+    <Compile Include="ViewModels\LoginRequest.cs" />
+    <Compile Include="ViewModels\LoginResponse.cs" />
+    <Compile Include="ViewModels\PaginationResponse.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\SaveUserInfoResponse.cs" />
+    <Compile Include="ViewModels\SaveUserInfoRequest.cs" />
+    <Compile Include="ViewModels\TimelineDateRangeViewModel.cs" />
+    <Compile Include="ViewModels\TimelineViewModel.cs" />
+    <Compile Include="ViewModels\UpdatedScoreResponse.cs" />
+    <Compile Include="ViewModels\UpdateInfoRequest.cs" />
+    <Compile Include="ViewModels\UpdatePasswordRequest.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

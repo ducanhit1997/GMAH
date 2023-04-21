@@ -1,0 +1,54 @@
+﻿@{
+    string prefix = ViewBag.ListIdPrefix.ToString();
+}
+
+<div class="card card-secondary">
+    <div class="card-header">
+        @ViewBag.ListTitle
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <div class="card-body">
+        <div name="@("selected" + prefix + "div")">
+            <div class="form-group row">
+                <label for="@("selected" + prefix)" class="col-sm-2 col-form-label">Thêm giáo viên</label>
+                <div class="col-sm">
+                    <div class="input-group input-group">
+                        <select class="form-control select2bs4" id="@("selected" + prefix)">
+                        </select>
+
+                        @if (prefix.Equals("headSubject"))
+                        {
+                            <input type="number" class="form-control" id="fromYear" placeholder="Từ năm">
+                            <input type="number" class="form-control" id="toYear" placeholder="Đến năm">
+                        }
+
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-primary btn-flat" onclick="AddTeacher('@prefix')">Thêm vào danh sách</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <table name="result" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Mã giáo viên</th>
+                    <th>Họ tên giáo viên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    @if (prefix.Equals("headSubject"))
+                    {
+                        <th>Từ năm</th>
+                        <th>Đến năm</th>
+                    }
+                    <th name="@("selected" + prefix + "div")"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

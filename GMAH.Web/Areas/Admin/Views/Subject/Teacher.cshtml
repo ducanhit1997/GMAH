@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Giáo viên bộ môn";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-header">
+        Xem danh sách giáo viên bộ môn
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="selectedSubject" class="col-sm-4 col-form-label">Xem danh sách của môn học</label>
+            <div class="col-sm">
+                <div class="input-group input-group-sm">
+                    <select class="form-control select2bs4" id="selectedSubject" onchange="LoadDataBySubjectId()">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang lưu dữ liệu, vui lòng đợi</p>
+</div>
+
+<div id="mainGroup">
+
+    <div id="headOfSubject" style="padding-top: 10px">
+        @{
+            ViewBag.ListTitle = "Danh sách trưởng bộ môn";
+            ViewBag.ListIdPrefix = "headSubject";
+        }
+        @Html.Partial("_ListTeacherSubject")
+    </div>
+    <div id="teacherInSubject" style="padding-top: 10px">
+        @{
+            ViewBag.ListTitle = "Danh sách giáo viên bộ môn";
+            ViewBag.ListIdPrefix = "teacherSubject";
+        }
+        @Html.Partial("_ListTeacherSubject")
+    </div>
+</div>
+
+<script>
+    var _ID_SUBJECT = @ViewBag.IdSubject;
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/InfoTeacherSubject.js"></script>
+}

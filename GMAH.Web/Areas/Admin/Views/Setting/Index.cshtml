@@ -1,0 +1,100 @@
+﻿@using GMAH.Models.Consts
+@using GMAH.Models.ViewModels
+
+@model List<SettingViewModel>
+
+@{
+    ViewBag.Title = "Thiết lập hệ thống";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            Danh sách thiết lập
+        </div>
+        <!-- /.card-header -->
+        @using (Html.BeginForm("Index", "Setting"))
+        {
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Thất bại!</h5>
+                        @ViewBag.Error
+                    </div>
+                }
+                else if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-primary alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Thành công!</h5>
+                        @ViewBag.Success
+                    </div>
+                }
+
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    SettingViewModel item = Model[i];
+
+                    <div class="form-group">
+                        <input name="settings[@i].Key" value="@item.Key" hidden />
+                        <input name="settings[@i].Name" value="@item.Name" hidden />
+                        <input name="settings[@i].Type" value="@item.Type" hidden />
+
+                        @switch (item.Type)
+                        {
+                            case InputTypeEnum.TEXT:
+                                <label>@item.Name</label>
+                                <input type="text" name="settings[@i].Value" class="form-control" value="@item.Value" />
+                                break;
+
+                            case InputTypeEnum.PASSWORD:
+                                <label>@item.Name</label>
+                                <input type="password" name="settings[@i].Value" class="form-control" value="@item.Value" />
+                                break;
+
+                            case InputTypeEnum.NUMBER:
+                                <label>@item.Name</label>
+                                <input type="number" name="settings[@i].Value" class="form-control" value="@item.Value" />
+                                break;
+
+                            case InputTypeEnum.CHECKBOX:
+                                <div class="custom-control custom-switch">
+                                    <input id="@item.Key" type="checkbox" name="settings[@i].Value" class="custom-control-input" value="@item.Value" @(item.Value != null && item.Value.Equals("1") ? "checked" : "")>
+                                    <label class="custom-control-label" for="@item.Key">@item.Name</label>
+                                </div>
+                                break;
+                            case InputTypeEnum.LONGTEXT:
+                                <label>@item.Name</label>
+                                <textarea name="settings[@i].Value"
+                                          class="form-control autoresize"
+                                          oninput="autoHeight(this)">@item.Value</textarea>
+                                break;
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="card-footer text-right">
+                <button class="btn btn-primary" type="submit">Lưu dữ liệu</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function autoHeight(element) {
+        element.style.height = 'auto';
+        element.style.height = (element.scrollHeight + 10) + 'px';
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var textarea = document.getElementsByClassName('autoresize');
+        for (var i = 0, len = textarea.length; i < len; i++) {
+            var element = textarea[i];
+            autoHeight(element);
+        }
+    });
+</script>

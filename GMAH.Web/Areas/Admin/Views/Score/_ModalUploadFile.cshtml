@@ -1,0 +1,52 @@
+﻿<div class="modal fade" id="uploadModal">
+    <div class="modal-dialog modal-lg">
+        <div id="loading" class="text-center text-white" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang lưu dữ liệu, vui lòng đợi</p>
+        </div>
+
+        <div class="modal-content" id="confirmform" style="display: none">
+            <div class="modal-header">
+                <h4 class="modal-title">Một số dữ liệu bị thiếu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body" id="missingMsg">
+            </div>
+
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="ImportFile(true)">Vẫn tiếp tục nhập</button>
+            </div>
+        </div>
+
+        <div class="modal-content" id="inputform">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập điểm từ excel</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="excelFile">Chọn tệp excel</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="excelFile">
+                            <label class="custom-file-label" for="excelFile">Chọn tệp excel</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ bỏ</button>
+                <a role="button" class="btn btn-outline-primary" href="~/Assests/Data/ImportScore.xlsx">Tải file mẫu</a>
+                <button type="button" class="btn btn-primary" onclick="ImportFile()">Nhập điểm</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

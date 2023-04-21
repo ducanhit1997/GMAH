@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Báo cáo cần duyệt";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Loại báo cáo</th>
+                        <th>Tiêu đề</th>
+                        <th>Gửi bởi</th>
+                        <th>Học sinh</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var linkInfo = '@Url.Action("Info", "Report")';
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListReviewReport.js"></script>
+}

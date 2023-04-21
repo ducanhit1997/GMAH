@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadClassBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Xem lớp</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedClass" onchange="LoadScoreByClassId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="notfound">
+            <p class="text-center" style="display: none">
+                Không tìm thấy dữ liệu
+            </p>
+        </div>
+        <div id="mainGroup" style="display: none">
+            <div class="row">
+                <div class="col">
+                    <select class="form-control rounded-0" id="selectedViewType" onchange="OnChangedViewType()">
+                        <option value="1" selected>Chế độ xem điểm thành phần</option>
+                        <option value="2">Chế độ xem điểm TB học kỳ</option>
+                    </select>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-secondary btn-flat"
+                            onclick="RefreshData()">
+                        <i class="fas fa-sync-alt"></i>
+                        Làm mới dữ liệu
+                    </button>
+                    <button class="btn btn-success btn-flat"
+                            onclick="ExportScore()">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        Xuất điểm ra file
+                    </button>
+                    <button class="btn btn-primary btn-flat"
+                            id="btnSendClassMail"
+                            onclick="SendClassMail()">
+                        <i class="fas fa-envelope"></i>
+                        Gửi mail cho cả lớp
+                    </button>
+                    <button class="btn btn-primary btn-flat"
+                            id="btnImportExcel"
+                            onclick="OpenModalImportScore()">
+                        <i class="fas fa-file-excel"></i>
+                        Nhập điểm bằng file
+                    </button>
+                </div>
+            </div>
+            <br />
+
+            <div class="table-responsive">
+                <table id="result" class="table table-bordered table-hover">
+                    <thead name="header" class="thead-light">
+                        <tr>
+                            <th>Mã học sinh</th>
+                            <th>Họ tên học sinh</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody name="body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ModalUploadFile")
+@Html.Partial("_ModalHistoryScore")
+
+<script>
+    var _ID_CLASS = @ViewBag.IdClass;
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var _ID_YEAR = @ViewBag.IdYear;
+</script>
+
+@Html.Partial("_ModalSendMail")
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListScore.js"></script>
+    <script src="~/Assests/Admin/js/pages/ImportExportScore.js"></script>
+    <script src="~/Assests/Admin/js/pages/HistoryScore.js"></script>
+}
+

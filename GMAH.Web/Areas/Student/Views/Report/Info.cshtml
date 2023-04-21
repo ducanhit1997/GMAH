@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin báo cáo";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assests/Admin/css/timeline.css" rel="stylesheet" />
+
+<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang tải dữ liệu, vui lòng đợi</p>
+</div>
+
+<div id="inputform">
+    <div class="card card-secondary">
+        <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">Thông tin báo cáo</h6>
+        </div>
+        <!-- /.card-header -->
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Họ tên người gửi:</label>
+                        <b id="FullnameSubmitReport"></b>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Học sinh:</label>
+                        <b id="FullnameStudent"></b>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Ngày gửi:</label>
+                        <b id="SubmitDateString"></b>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Ngày cập nhật cuối:</label>
+                        <b id="LastUpdateDateString"></b>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Trạng thái:</label>
+                        <b id="ReportStatusName"></b>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Tóm tắt nội dung điều chỉnh:</label>
+                        <b id="Issue"></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-secondary mt-3">
+        <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">Nội dung báo cáo</h6>
+        </div>
+        <!-- /.card-header -->
+
+        <div class="card-body">
+            <h5 id="ReportTitle"></h5>
+            <hr />
+            <div id="ReportContent">
+
+            </div>
+            <hr />
+            <div id="ReportFile" class="row">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-secondary mt-3" id="HistoryDiv">
+        <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">Lịch sử duyệt</h6>
+        </div>
+        <!-- /.card-header -->
+
+        <div class="card-body" id="ReportHistory">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var _ID_REPORT = @ViewBag.IdReport;
+    var linkListReport = '@Url.Action("Index", "Report")';
+</script>
+
+@section scripts {
+    <script src="~/Assests/Student/js/pages/InfoReport.js"></script>
+}

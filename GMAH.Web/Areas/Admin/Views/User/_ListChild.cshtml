@@ -1,0 +1,31 @@
+﻿<div id="listChild">
+    <hr />
+    <h4>Danh sách học sinh của phụ huynh</h4>
+
+    <div class="form-group row">
+        <label for="selectedStudent" class="col-sm-2 col-form-label">Thêm học sinh</label>
+        <div class="col-sm">
+            <div class="input-group input-group-sm">
+                <select class="form-control select2bs4" id="selectedStudent" name="selectedStudent">
+                </select>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-primary btn-flat" onclick="AddStudent()">Thêm vào danh sách</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <table id="resultChild" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Mã học sinh</th>
+                <th>Họ tên học sinh</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Assests/Admin/js/pages/ListChild.js"></script>

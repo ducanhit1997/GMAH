@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách học kỳ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group row">
+                        <label for="settingDefaultSemester" class="col-sm-2 col-form-label">Học kỳ hiện tại</label>
+                        <div class="col-sm-6">
+                            <div class="input-group input-group-sm">
+                                <select class="form-control select2bs4" id="settingDefaultSemester">
+                                </select>
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-primary btn-flat" onclick="SetCurrentSemester()">Lưu cài đặt</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right col">
+                    <button class="btn btn-primary"
+                            onclick="CreateNewSemester()">
+                        <i class="fas fa-plus"></i>
+                        Tạo học kỳ
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Năm học</th>
+                        <th>Học kỳ</th>
+                        <th>Bắt đầu</th>
+                        <th>Kết thúc</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("_ModalSemester")
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListSemester.js"></script>
+    <script src="~/Assests/Admin/js/pages/InfoSemester.js"></script>
+    <script>
+        $('.datetimepicker').datetimepicker({
+            format: 'DD/MM/yyyy'
+        });
+    </script>
+}

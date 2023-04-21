@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Điểm danh học sinh";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadClassBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Xem lớp</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedClass" onchange="LoadAttendanceByClassId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 pt-3">
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Điểm danh cho ngày</label>
+                    <div class="col-sm">
+                        <div class="input-group datetimepicker date" id="DateAttendance" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#DateAttendance" name="DateAttendance" />
+                            <div class="input-group-append" data-target="#DateAttendance" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <div id="attendanceHTML">
+            </div>
+            <div class="text-right">
+                <button class="btn btn-primary" type="button" onclick="SaveAttendance()">Lưu dữ liệu điểm danh</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var _ID_CLASS = @ViewBag.IdClass;
+</script>
+
+@section scripts {
+    <script src="~/Assests/Admin/js/pages/AttendanceClass.js"></script>
+    <script src="~/Assests/Admin/js/pages/AttendanceTable.js"></script>
+}

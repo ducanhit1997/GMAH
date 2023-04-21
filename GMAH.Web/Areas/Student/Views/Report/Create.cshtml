@@ -1,0 +1,165 @@
+﻿@using GMAH.Web.Helpers
+@using GMAH.Models.Consts
+@using GMAH.Models.Models
+
+@{
+    ViewBag.Title = "Tạo báo cáo";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    var user = SessionHelper.GetSession<UserIdentity>("USER");
+}
+
+@Styles.Render("~/css/ckeditor")
+
+<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang lưu dữ liệu, vui lòng đợi</p>
+</div>
+
+
+<div class="card card-secondary" id="inputform">
+    <div class="card-header">
+        <h3 class="card-title">Gửi báo cáo</h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="form-group">
+            <label for="status">Vấn đề báo cáo</label>
+            <select class="form-control" id="status" onchange="LoadReportField()">
+                <option value="1">Điểm số</option>
+                <option value="2">Điểm danh</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ReportTitle">Tiêu đề báo cáo</label>
+            <input type="text" class="form-control" name="ReportTitle" id="ReportTitle" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ReportContent">Nội dung báo cáo</label>
+            <textarea name="ReportContent" id="ReportContent"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-3 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadSubject()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (user.IdRole == (int)RoleEnum.PARENT)
+            {
+                <div class="col">
+                    <div class="row">
+                        <label for="selectedClass" class="col-sm-3 col-form-label">Học sinh</label>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm">
+                                <select class="form-control select2bs4" id="selectedStudent" onchange="LoadSubject()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div id="field1" class="pt-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="selectedSubject" class="col-sm-3 col-form-label">Môn học</label>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm">
+                                <select class="form-control select2bs4" id="selectedSubject" onchange="LoadScoreType()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="selectedScoreType" class="col-sm-3 col-form-label">Cột điểm</label>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm">
+                                <select class="form-control select2bs4" id="selectedScoreType">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 pt-3">
+                    <div class="row">
+                        <label for="editvalue1" class="col-sm-3 col-form-label">Số điểm thực tế</label>
+                        <div class="col-sm">
+                            <div class="input-group input-group-sm">
+                                <input type="number" step="0.1" class="form-control" name="editvalue1" id="editvalue1" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="field2" style="display: none" class="pt-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <label class="col-sm-3 col-form-label">Ngày</label>
+                        <div class="col-sm">
+                            <div class="input-group datetimepicker date" id="DateAttendance" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#DateAttendance" name="DateAttendance" />
+                                <div class="input-group-append" data-target="#DateAttendance" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="editvalue2" class="col-sm-3 col-form-label">Thông tin đúng</label>
+                        <div class="col-sm">
+                            <select class="form-control" id="editvalue2">
+                                <option value="0">Không vắng</option>
+                                <option value="1">Vắng có phép</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_UploadFile")
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer text-right">
+        <button class="btn btn-primary" onclick="SubmitReport()">Gửi báo cáo</button>
+    </div>
+</div>
+
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var linkReport = '@Url.Action("Index", "Report")';
+</script>
+
+@if (user.IdRole == (int)RoleEnum.STUDENT)
+{
+    <script>
+        var _ID_STUDENT = @user.IdUser;
+    </script>
+}
+
+@section scripts {
+    @Scripts.Render("~/js/ckeditor")
+    <script src="~/Assests/Student/js/pages/CreateReport.js"></script>
+}

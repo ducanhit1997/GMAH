@@ -1,0 +1,32 @@
+﻿<div id="listParent">
+    <hr />
+    <h4>Danh sách phụ huynh của học sinh</h4>
+
+    <div class="form-group row">
+        <label for="selectedStudent" class="col-sm-2 col-form-label">Thêm phụ huynh</label>
+        <div class="col-sm">
+            <div class="input-group input-group-sm">
+                <select class="form-control select2bs4" id="selectedParent" name="selectedParent">
+                </select>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-primary btn-flat" onclick="AddParent()">Thêm vào danh sách</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <table id="resultParent" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Phụ huynh</th>
+                <th>Điện thoại</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Assests/Admin/js/pages/ListParent.js"></script>

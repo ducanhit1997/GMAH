@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin lớp học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    @Html.Partial("_ClassInfo")
+</div>
+
+<script>
+    var _ID_CLASS = @ViewBag.IdClass;
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var linkList = '@Url.Action("Index", "Class")';
+</script>
+
+@section scripts {
+    <script src="~/Assests/Admin/js/pages/InfoClass.js"></script>
+}
+

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Tài khoản phụ huynh";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/css/datatable")
+
+<div class="container-fluid">
+    @Html.Partial("_UserInfo")
+</div>
+
+<script>
+    var _ID_PARENT = @ViewBag.IdUser;
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+}

@@ -1,0 +1,22 @@
+﻿@using GMAH.Models.Models
+@using GMAH.Models.Consts
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    var userObj = GMAH.Web.Helpers.SessionHelper.GetSession<UserIdentity>("USER");
+
+}
+
+@switch ((RoleEnum)userObj.IdRole)
+{
+    case RoleEnum.PARENT:
+        Html.RenderPartial("_DashboardParent");
+        break;
+    case RoleEnum.STUDENT:
+        Html.RenderPartial("_DashboardStudent");
+        break;
+    default:
+        Html.RenderPartial("_DashboardNone");
+        break;
+}

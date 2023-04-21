@@ -1,0 +1,74 @@
+﻿@using GMAH.Web.Helpers
+@using GMAH.Models.Consts
+@using GMAH.Models.Models
+
+@{
+    var user = SessionHelper.GetSession<UserIdentity>("USER");
+}
+
+
+
+
+@switch ((RoleEnum)user.IdRole)
+{
+    case RoleEnum.PARENT:
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index", "Score")">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Xem điểm</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index", "Timeline")">
+                <i class="fas fa-calendar"></i>
+                <span>Xem thời khoá biểu</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index", "Attendance")">
+                <i class="fas fa-user-check"></i>
+                <span>Xem điểm danh</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index", "Report")">
+                <i class="fas fa-sticky-note"></i>
+                <span>Báo cáo</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Student", "Info")">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Thông tin học sinh</span>
+            </a>
+        </li>
+        break;
+    case RoleEnum.STUDENT:
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Self", "Score")">
+                <i class="fa fa-graduation-cap"></i>
+                <span>Xem điểm</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Self", "Timeline")">
+                <i class="fas fa-calendar"></i>
+                <span>Xem thời khoá biểu</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Self", "Attendance")">
+                <i class="fas fa-user-check"></i>
+                <span>Xem điểm danh</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="@Url.Action("Index", "Report")">
+                <i class="fas fa-sticky-note"></i>
+                <span>Báo cáo</span>
+            </a>
+        </li>
+        break;
+    default:
+        break;
+}

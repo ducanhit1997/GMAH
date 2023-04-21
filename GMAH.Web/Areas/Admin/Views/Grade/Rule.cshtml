@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin luật xếp hạng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang tải dữ liệu, vui lòng đợi</p>
+</div>
+
+<div class="container-fluid" id="mainGroup">
+    <div class="card">
+        <div class="card-header">
+            @ViewBag.Title
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="form-group">
+                <label>Áp dụng cho năm học:</label>
+                <select class="form-control" id="selectedSemester" name="selectedSemester" onchange="LoadClassBySemesterId()">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Áp dụng cho các lớp:</label>
+                <select class="form-control" id="selectedClass" name="selectedClass" multiple="multiple">
+                </select>
+            </div>
+
+            <b>Định nghĩa các luật</b>
+            <div id="ruleTab" style="padding-top: 10px">
+
+            </div>
+        </div>
+
+        <div class="card-footer text-right">
+            <button class="btn btn-primary" type="button" onclick="SaveData()">Lưu dữ liệu</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var _ID_RULE = @ViewBag.IdRule;
+    var _ID_SEMESTER = 0;
+    var _ID_CLASS = [];
+    var linkListRule = '@Url.Action("Index", "Grade")';
+</script>
+
+@section scripts {
+    <script src="~/Assests/Admin/js/pages/InfoRule.js"></script>
+}

@@ -1,0 +1,73 @@
+﻿<div class="modal fade" id="semesterModal">
+    <div class="modal-dialog modal-lg">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang lưu dữ liệu, vui lòng đợi</p>
+        </div>
+
+        <div class="modal-content" id="inputform">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin học kỳ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="SemesterYear">Năm học @Html.Partial("_RequiredLabel")</label>
+                    <input type="text" class="form-control" name="SemesterYear" id="SemesterYear" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="SemesterName">Tên gọi học kỳ @Html.Partial("_RequiredLabel")</label>
+                    <input type="text" class="form-control" name="SemesterName" id="SemesterName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="SemesterName">Trọng số điểm trung bình năm @Html.Partial("_RequiredLabel")</label>
+                    <input type="number" class="form-control" name="ScoreWeight" id="ScoreWeight" min="0" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="icheck-primary d-inline">
+                        <input type="checkbox" id="IsCurrentSemester" name="IsCurrentSemester">
+                        <label for="IsCurrentSemester">
+                            Đặt làm học kỳ hiện tại
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ngày bắt đầu:</label>
+                            <div class="input-group datetimepicker date" id="DateStart" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#DateStart" name="DateStart" />
+                                <div class="input-group-append" data-target="#DateStart" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Ngày kết thúc:</label>
+                            <div class="input-group datetimepicker date" id="DateEnd" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#DateEnd" name="DateEnd" />
+                                <div class="input-group-append" data-target="#DateEnd" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="SaveSemester()">Lưu lại</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

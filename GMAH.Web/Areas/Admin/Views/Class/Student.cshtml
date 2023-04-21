@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách lớp";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadClassBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Xem lớp</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedClass" onchange="LoadStudentByClassId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <div class="form-group row">
+                <label for="selectedStudent" class="col-sm-2 col-form-label">Thêm học sinh vào lớp</label>
+                <div class="col-sm">
+                    <div class="input-group input-group-sm">
+                        <select class="form-control select2bs4" id="selectedStudent" name="selectedStudent">
+                        </select>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-primary btn-flat" onclick="AddStudent()">Thêm vào danh sách</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã học sinh</th>
+                        <th>Họ tên học sinh</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var _ID_CLASS = @ViewBag.IdClass;
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/InfoStudentInClass.js"></script>
+}

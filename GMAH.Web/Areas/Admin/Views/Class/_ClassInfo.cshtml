@@ -1,0 +1,41 @@
+﻿<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang lưu dữ liệu, vui lòng đợi</p>
+</div>
+
+
+<div class="card card-secondary" id="inputform">
+    <div class="card-header">
+        <h3 class="card-title">Thông tin lớp học</h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="form-group">
+            <label for="ClassName">Tên lớp @Html.Partial("_RequiredLabel")</label>
+            <input type="text" class="form-control" name="ClassName" id="ClassName" required>
+        </div>
+        <div class="form-group">
+            <label for="IdSemester">Lớp học kỳ @Html.Partial("_RequiredLabel")</label>
+            <select class="form-control" name="IdSemester" id="IdSemester">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="IdFormTeacher">Giáo viên chủ nhiệm</label>
+            <select class="form-control" name="IdFormTeacher" id="IdFormTeacher">
+            </select>
+        </div>
+        <div class="form-group">
+            <b>Các môn học của lớp</b>
+            <div id="subjectCheckbox">
+
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer text-right">
+        <a class="btn btn-secondary" role="button" href="@Url.Action("Index", "Class")">Huỷ bỏ</a>
+        <button class="btn btn-primary" onclick="SaveClass()">Lưu dữ liệu</button>
+    </div>
+</div>

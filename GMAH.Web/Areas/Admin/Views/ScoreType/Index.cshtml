@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Thiết lập thành phần điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-4">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Năm học</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadClassBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Lớp</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedClass" onchange="LoadSubjectByClassId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-2 col-form-label">Môn</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSubject" onchange="LoadScoreType()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="mainGroup" style="display: none">
+            <div class="text-right" style="padding-bottom: 10px">
+                <button class="btn btn-primary"
+                        onclick="CreateNew()">
+                    <i class="fas fa-plus"></i>
+                    Tạo thành phần điểm
+                </button>
+            </div>
+        </div>
+
+        <table id="result" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Tên thành phần điểm</th>
+                    <th>Hệ số</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+</script>
+
+@Html.Partial("_ModalScoreType")
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListScoreType.js"></script>
+    <script src="~/Assests/Admin/js/pages/InfoScoreType.js"></script>
+}

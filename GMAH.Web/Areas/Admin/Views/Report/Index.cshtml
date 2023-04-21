@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách báo cáo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <div class="filter">
+                <div class="form-group">
+                    <label for="status">Xem theo trạng thái báo cáo</label>
+                    <select class="form-control" id="status" onchange="LoadReportData()">
+                        <option value="null">Toàn bộ</option>
+                        <option value="1">Đợi giáo viên duyệt</option>
+                        <option value="2">Đợi giám thị duyệt</option>
+                        <option value="3">Đợi giáo viên bộ môn duyệt</option>
+                        <option value="100">Đã được duyệt</option>
+                        <option value="101">Bị từ chối</option>
+                    </select>
+                </div>
+            </div>
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Loại báo cáo</th>
+                        <th>Tiêu đề</th>
+                        <th>Gửi bởi</th>
+                        <th>Học sinh</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var linkInfo = '@Url.Action("Info", "Report")';
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListReport.js"></script>
+}

@@ -1,0 +1,125 @@
+﻿@using GMAH.Models.ViewModels
+
+@{
+    List<RoleViewModel> listRole = (List<RoleViewModel>)ViewBag.ListRole;
+    string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"]
+    .ToString()
+    .Replace("Info", string.Empty);
+}
+
+<script>
+    var actionName = '@actionName';
+    var listLink = '@Url.Action(actionName, "User")';
+</script>
+
+<div id="loading" class="text-center" style="display: none">
+    <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+    <p>Đang lưu dữ liệu, vui lòng đợi</p>
+</div>
+
+<div class="card card-secondary" id="inputform">
+    <div class="card-header">
+        <h3 class="card-title">Quản lý tài khoản</h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <h4>Thông tin cá nhân</h4>
+
+        <div class="form-group">
+            <label for="FullName">Họ tên người dùng @Html.Partial("_RequiredLabel")</label>
+            <input type="text" class="form-control" name="FullName" id="FullName" required>
+        </div>
+
+        <div class="form-group" name="StudentCodeForm">
+            <label for="CitizenID">CMND/CCCD</label>
+            <input type="text" class="form-control" name="CitizenId" id="CitizenId">
+        </div>
+
+        <div class="form-group" name="TeacherCodeForm" style="@(actionName.Equals("Teacher", StringComparison.OrdinalIgnoreCase) ? "" : "display: none")">
+            <label for="TeacherCode">Mã số giáo viên</label>
+            <input type="text" class="form-control" name="TeacherCode" id="TeacherCode">
+        </div>
+
+        <div class="form-group" name="StudentCodeForm" style="@(actionName.Equals("Student", StringComparison.OrdinalIgnoreCase) ? "" : "display: none")">
+            <label for="StudentCode">Mã số học sinh</label>
+            <input type="text" class="form-control" name="StudentCode" id="StudentCode">
+        </div>
+
+        <div class="form-group">
+            <label>Chức vụ</label>
+            <select class="form-control" name="IdRole">
+                @foreach (var role in listRole)
+                {
+                    <option value="@role.IdRole">@role.RoleName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group" name="Address">
+            <label for="Address">Địa chỉ</label>
+            <input type="text" class="form-control" name="Address" id="Address">
+        </div>
+
+        <div class="form-group">
+            <label for="Phone">Số điện thoại</label>
+            <input type="text" class="form-control" name="Phone" id="Phone" maxlength="10">
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" name="Email" id="Email">
+        </div>
+
+        <hr />
+        <h4>Thông tin tài khoản</h4>
+
+        <div class="form-group">
+            <label for="Username">Tài khoản đăng nhập @Html.Partial("_RequiredLabel")</label>
+            <input type="text" class="form-control" name="Username" id="Username" required>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="Password" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Xác nhận lại mật khẩu</label>
+                    <input type="password" name="Repassword" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        @if (actionName.Equals("Parent", StringComparison.OrdinalIgnoreCase))
+        {
+            Html.RenderPartial("_ListChild");
+        }
+        else if (actionName.Equals("Student", StringComparison.OrdinalIgnoreCase))
+        {
+            Html.RenderPartial("_ListParent");
+        }
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer text-right">
+        <a class="btn btn-secondary" role="button" href="@Url.Action(actionName, "User")">Huỷ bỏ</a>
+        <button class="btn btn-primary" onclick="SendEmailPassword()">Gửi mật khẩu cho người dùng</button>
+        <button class="btn btn-primary" onclick="SaveUserInfo()">Lưu dữ liệu</button>
+    </div>
+</div>
+
+<script src="~/Assests/Admin/js/pages/InfoUser.js"></script>
+
+@if (ViewBag.IdUser != null && (int)ViewBag.IdUser > 0)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            // Lấy thông tin user
+            GetUserInfo(@ViewBag.IdUser);
+        });
+    </script>
+}

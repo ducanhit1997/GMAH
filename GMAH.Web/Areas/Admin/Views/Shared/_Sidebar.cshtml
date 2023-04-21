@@ -1,0 +1,56 @@
+﻿
+@using GMAH.Web.Helpers
+@using GMAH.Models.Consts
+@using GMAH.Models.Models
+
+@{
+    var user = SessionHelper.GetSession<UserIdentity>("USER");
+    var listMenu = MenuConst.GetMenuAdmin((RoleEnum)user.IdRole);
+
+    var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    var actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+}
+@{ 
+    int menuIndex = 0;
+}
+
+@foreach (var menu in listMenu)
+{
+    bool hasChild = menu.ListChild != null && menu.ListChild.Count > 0;
+    bool isActive = controllerName.Equals(menu.Controller, StringComparison.OrdinalIgnoreCase);
+    if (!hasChild && isActive)
+    {
+        isActive = actionName.Equals(menu.Action, StringComparison.OrdinalIgnoreCase);
+    }
+
+    <li class="nav-item @(isActive ? "active" : "")">
+        @if (hasChild)
+        {
+            <a class="nav-link @(isActive ? "" : "collapsed")" href="@(hasChild ? "#" : Url.Action(menu.Action, menu.Controller))"
+                data-toggle="collapse" data-target="#collapseMenu@(menuIndex)" aria-expanded="true" aria-controls="collapseMenu@(menuIndex)">
+                <i class="@menu.Icon"></i>
+                <span>@menu.Title</span>
+            </a>
+
+            <div id="collapseMenu@(menuIndex)" class="collapse @(isActive ? "show" : "")" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    @foreach (var subMenu in menu.ListChild)
+                    {
+                        bool isChildActive = controllerName.Equals(subMenu.Controller, StringComparison.OrdinalIgnoreCase) && actionName.Equals(subMenu.Action, StringComparison.OrdinalIgnoreCase);
+
+                        <a class="collapse-item @(isChildActive ? "active" : "")" href="@Url.Action(subMenu.Action, subMenu.Controller)">@subMenu.Title</a>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <a class="nav-link" href="@(hasChild ? "#" : Url.Action(menu.Action, menu.Controller))">
+                <i class="@menu.Icon"></i>
+                <span>@menu.Title</span>
+            </a>
+        }
+    </li>
+
+    menuIndex++;
+}

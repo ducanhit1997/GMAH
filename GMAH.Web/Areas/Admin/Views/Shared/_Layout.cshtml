@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản lý điểm học sinh - @ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    @Styles.Render("~/css/admin")
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/quantri">
+                <div class="sidebar-brand-text mx-3">Cổng quản trị</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            @Html.Partial("_Sidebar")
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@(GMAH.Web.Helpers.SessionHelper.GetSession<GMAH.Models.Models.UserIdentity>("USER").Fullname)</span>
+                                <img class="img-profile rounded-circle"
+                                     src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/quantri/thoat">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@ViewBag.Title</h1>
+                    </div>
+
+                    @RenderBody()
+                </div>
+            </div>
+
+
+            <!-- Main Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <strong>Bản quyền thuộc về GMAH</strong>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <script>
+        var _JWT_TOKEN = '@GMAH.Web.Helpers.SessionHelper.GetSession("JWT_TOKEN")';
+    </script>
+    @Scripts.Render("~/js/admin")
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> 
+    @RenderSection("scripts", required: false)
+</body>
+</html>

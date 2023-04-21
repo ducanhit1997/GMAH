@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Thời khoá biểu";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <div class="jumbotron">
+        <p>Chọn học sinh và học kỳ muốn xem thời khoá biểu tại đây:</p>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedClass" class="col-sm-3 col-form-label">Học sinh</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedStudent" onchange="LoadTimelineDateRangeViewModel()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-3 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadTimelineDateRangeViewModel()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="text-center" style="display: none">
+        <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+        <p>Đang tải dữ liệu, vui lòng đợi</p>
+    </div>
+    <div id="mainGroup">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label for="selectedDate" class="col-sm-2 col-form-label">Xem tuần</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control" id="selectedDate" onchange="LoadTimelineData()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="timelineData" style="padding-top: 10px">
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Assests/Student/js/pages/ViewTimeline.js"></script>
+    <script src="~/Assests/Student/js/pages/TimelineTable.js"></script>
+}
+

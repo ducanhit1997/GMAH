@@ -1,0 +1,33 @@
+﻿@{
+    string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    List<string> listColumn = (List<string>)ViewBag.ListColumn;
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <div class="text-right">
+                <a role="button" class="btn btn-primary"
+                   href="@Url.Action("Info" + actionName, "User")">
+                    <i class="fas fa-plus"></i>
+                    Tạo tài khoản
+                </a>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        @foreach (var column in listColumn)
+                        {
+                            <th>@(column == null ? "" : column)</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

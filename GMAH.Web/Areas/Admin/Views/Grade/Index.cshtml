@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Luật xếp hạng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <b>Xem dữ liệu trong học kỳ</b>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <label for="selectedSemester" class="col-sm-2 col-form-label">Học kỳ</label>
+                    <div class="col-sm">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control select2bs4" id="selectedSemester" onchange="LoadRuleBySemesterId()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div id="loading" class="text-center" style="display: none">
+            <i class="fas fa-3x fa-circle-notch fa-spin"></i>
+            <p>Đang tải dữ liệu, vui lòng đợi</p>
+        </div>
+        <div id="mainGroup">
+            <div class="text-right">
+                <a class="btn btn-primary" role="button" href="@Url.Action("Rule", "Grade")">
+                    <i class="fas fa-plus"></i>
+                    Tạo luật xếp hạng
+                </a>
+            </div>
+            <hr />
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã luật</th>
+                        <th>Áp dụng cho lớp</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    var _ID_SEMESTER = @ViewBag.IdSemester;
+    var linkInfoRule = '@Url.Action("Rule", "Grade")';
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListRule.js"></script>
+}

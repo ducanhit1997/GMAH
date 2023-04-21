@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách môn học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/datatable")
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <div class="text-right">
+                <button class="btn btn-primary"
+                        onclick="CreateNewSubject()">
+                    <i class="fas fa-plus"></i>
+                    Tạo môn học
+                </button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="result" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Mã môn học</th>
+                        <th>Tên môn học</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("_ModalSubject")
+
+<script>
+    var linkTeacher = '@Url.Action("Teacher", "Subject")';
+</script>
+
+@section scripts {
+    @Scripts.Render("~/js/datatable")
+    <script src="~/Assests/Admin/js/pages/ListSubject.js"></script>
+    <script src="~/Assests/Admin/js/pages/InfoSubject.js"></script>
+}
